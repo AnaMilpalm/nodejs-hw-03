@@ -1,6 +1,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import contactsRouter from './routes/contacts.js';
 
 import { getEnvVar } from './utils/getEnvVar.js';
 
@@ -10,6 +11,8 @@ export const startServer = () => {};
 const app = express();
 
 app.use(express.json());
+app.use('/contacts', contactsRouter);
+
 app.use(cors());
 
 app.use(
