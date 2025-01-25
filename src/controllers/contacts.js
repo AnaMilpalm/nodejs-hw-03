@@ -1,21 +1,16 @@
 // import express from 'express';
 // import { getContactsController, getContactByIdController } from '../controllers/contactsController.js';
 
-// const router = express.Router();
+import { getContactById } from '../services/contacts';
 
-// router.get('/', getContacts);
-
-// router.get('/:contactId', getContact);
-
-// export default router;
+import createHttpError from 'http-errors';
 
 export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   const contact = await getContactById(contactId);
 
   if (!contact) {
-    next(new Error('Contact not found'));
-    return;
+    throw createHttpError(404, 'Contact not found');
   }
 
   res.json({
